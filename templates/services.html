@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified Jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!--Knockout.js-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/knockout-3.4.0.js') }}'></script>
+
+	<!--Front-end View Controller-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/header.js') }}' defer="defer"></script>
+
+	<!--header stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/header.css') }}">
+	<!--footer stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/footer.css') }}">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>TIE Training | Services</title>
+</head>
+
+<body>
+	<body>
+	<div class="container light-primary-bg">
+		{% include "header.html" ignore missing %}
+		<div class="row primary-bg">
+				<h1 class="" style="margin:16px; color:#ffffff;">Services</h1>
+		</div>
+		{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+		    <ul class=flashes>
+		    {% for message in messages %}
+		      <li>{{ message }}</li>
+		    {% endfor %}
+		    </ul>
+		  {% endif %}
+		{% endwith %}
+		<div class="col-md-2">
+			<img src="http://kmit.cc/wp-content/uploads/2015/07/corporate-training-programs.jpg" class="img-responsive center" style="margin-top:16px;">
+		</div>
+		<div class="col-md-10">
+			<div class="col-md-7">
+				<h5 class="primary-text large">CONSULTANTING</h5>
+				<ul>
+					<li class="secondary-text medium">Managing 3rd party vendor contracts and contractors</li>
+					<li class="secondary-text medium">Process Development</li>
+					<li class="secondary-text medium">Project Management</li>
+				</ul>
+			</div>
+			<div class="col-md-5">
+				<img src="http://images.wisegeek.com/signing-in-at-a-conference.jpg" class="img-responsive center" style="margin-top:16px; float:right;">
+			</div>
+		</div>
+		<br/>
+		<div class="col-md-8">
+			<div class="col-md-7">
+				<h5 class="primary-text large">CORPORATE TRAINING</h5>
+				<ul>
+					<li class="secondary-text medium">Team building for Managers</li>
+					<li class="secondary-text medium">Team work and team building</li>
+					<li class="secondary-text medium">Virtual team building and management</li>
+					<li class="secondary-text medium">High performance teams</li>
+				</ul>
+			</div>
+			<div class="col-md-5">
+				<img src="http://marketwaysarabia.com/wp-content/uploads/2013/10/CorporateTRaining.jpg" class="img-responsive center" style="margin-top:16px; float:right;">
+			</div>
+		</div>
+		<div class="col-md-2">
+				
+			{% if 'username' not in session %}
+			<h1 class="large  text-center"><u><a class="green-text" style="margin:12px; padding:20px; float:left;" href="/login">Sign up</a></u></h1>
+			{% endif %}
+		</div>
+		{% include "footer.html" ignore missing %}
+	</div>
+</body>
+</body>
+
+</html>

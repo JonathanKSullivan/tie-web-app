@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified Jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!--Knockout.js-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/knockout-3.4.0.js') }}'></script>
+
+	<!--Front-end View Controller-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/header.js') }}' defer="defer"></script>
+
+	<!--header stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/header.css') }}">
+	<!--footer stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/footer.css') }}">
+
+	<title>TIE Training | About Us</title>
+</head>
+
+<body>
+	<div class="container">
+		{% include "header.html" ignore missing %}
+		<div class="row primary-bg">
+				<h1 class="" style="margin:16px; color:#ffffff;">New Event</h1>
+		</div>
+		{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+		    <ul class=flashes>
+		    {% for message in messages %}
+		      <li>{{ message }}</li>
+		    {% endfor %}
+		    </ul>
+		  {% endif %}
+		{% endwith %}
+		<div class="col-md-12">
+				<form  action="#" method = 'post' style="margin-top:20px;">
+					<div class="event col-md-4">
+						<fieldset>
+							<label for="form_size">Maximum Capacity</label>
+							<input id="form_size" type="number" name="size" class="contact form-control" placeholder="Maximum # of seats" min=0 step=5 value="{{event.size}}">	
+						</fieldset>
+					</div>
+					<div class="event col-md-4">
+						<fieldset>
+							<label for="form_date">Date of Event*</label>
+							<input id="form_date" type="datetime-local" name="date" class="contact form-control" placeholder="Date of Event" required="required" value="{{formatted_date}}">	
+						</fieldset>
+					</div>
+					<div class="event col-md-4">
+						<fieldset>
+							<label for="form_cost">Cost of Event*</label>
+							<input id="form_cost" type="number" name="cost" class="contact form-control" placeholder="Cost of Event" min=0 step=.05 required="required" value="{{event.cost}}">	
+						</fieldset>
+					</div>
+					<div class="event col-md-12">
+						<fieldset>
+							<label for="form_topic">Topic*</label>
+							<input id="form_topic" type="text" maxlength="150" name="topic" class="contact form-control" placeholder="Topic of Event" required="required" value="{{event.topic}}">	
+						</fieldset>
+					</div>
+					<div class="event col-md-12">
+						<fieldset>
+							<label for="form_detail">Details*</label>
+							<textarea id="form_detail" name="details" class="contact form-control" placeholder="Details of Event" required="required">{{event.details}}</textarea>	
+						</fieldset>
+					</div>
+
+					<div class="event col-md-12">
+						<fieldset>
+							<div class="contact col-md-12">
+								<label for="form_address">Address*</label>
+								<input id="form_address" type="text" maxlength="250" name="address" class="contact form-control" placeholder="Address of Event" required="required" value="{{event.address}}">	
+							</div>
+							<div class="contact col-md-6">
+								<label for="form_city">City*</label>
+								<input id="form_city" type="text" maxlength="50" name="city" class="contact form-control" placeholder="City of Event" required="required" value="{{event.city}}">	
+							</div>
+							<div class="contact col-md-2">
+								<label for="state">State</label><input id="form_state" name="state" type="text" class="contact form-control" maxlength="2" list="state_abbr" value="{{event.state}}"/>
+								<datalist id="state_abbr">
+									<option value="AL">
+									<option value="AK">
+									<option value="AZ">
+									<option value="AR">
+									<option value="CA">
+									<option value="CO">
+									<option value="CT">
+									<option value="DE">
+									<option value="FL">
+									<option value="GA">
+									<option value="HI">
+									<option value="ID">
+									<option value="IL">
+									<option value="IN">
+									<option value="IA">
+									<option value="KS">
+									<option value="KY">
+									<option value="LA">
+									<option value="ME">
+									<option value="MD">
+									<option value="MA">
+									<option value="MI">
+									<option value="MN">
+									<option value="MS">
+									<option value="MO">
+									<option value="MT">
+									<option value="NE">
+									<option value="NV">
+									<option value="NH">
+									<option value="NJ">
+									<option value="NM">
+									<option value="NY">
+									<option value="NC">
+									<option value="ND">
+									<option value="OH">
+									<option value="OK">
+									<option value="OR">
+									<option value="PA">
+									<option value="RI">
+									<option value="SC">
+									<option value="SD">
+									<option value="TN">
+									<option value="TX">
+									<option value="UT">
+									<option value="VT">
+									<option value="VA">
+									<option value="WA">
+									<option value="WV">
+									<option value="WI">
+									<option value="WY">
+								</datalist>
+							</div>
+							<div class="contact col-md-4">
+								<label for="form_zip">Zip*</label>
+								<input id="form_zip" type="text" maxlength="5" name="zipcode" class="contact form-control" placeholder="State of Event" required="required" value="{{event.zipcode}}">	
+							</div>
+						</fieldset>
+					</div>
+					
+					<div class="event col-md-12" style="margin-top:16px;">
+						<input  type="submit" class="center-block btn btn-success btn-send" value="Create Event">
+					</div>
+					<p class="text-muted"><strong>*</strong> These fields are required.</p>
+				</form>
+			</div>
+
+		
+		{% include "footer.html" ignore missing %}
+	</div>
+</body>
+
+</html>
+
+

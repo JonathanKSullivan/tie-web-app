@@ -1,0 +1,15 @@
+<div class = "row footer-text ">
+	<div class = "col-md-12 " style="margin-top:20px;"> 
+	
+		<p class="footer-text">
+			TIE Client Login: 
+			{% if 'username' not in session %}
+				<a href="{{url_for('login')}}">Click here to log in </a> 
+			{% else %}
+				<a href="{{url_for('disconnect')}}">Click here to logout </a> 
+			{% endif %}
+			| ©Copyright 2016 TIE Training | <a href="{{url_for('api')}}">API Documentation</a>
+			| Site design by <a href="http://www.jonathanksullivan.com">Jonathan K Sullivan.</a>
+		</p>
+	</div>
+</div>

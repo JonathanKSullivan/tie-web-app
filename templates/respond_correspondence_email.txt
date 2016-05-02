@@ -1,0 +1,11 @@
+Dear, {{correspondence.first_name}} {{correspondence.last_name}}
+
+{{msg_response}}
+
+Regards,
+
+{{session.username}}
+The TIE 
+
+----------Original Message----------
+{{message}}

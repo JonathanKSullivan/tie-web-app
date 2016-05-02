@@ -1,0 +1,2 @@
+Welcome! Thanks for for being apart of TIE. Please follow this link to reset your password:
+{{ token_url }}

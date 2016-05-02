@@ -1,0 +1,19 @@
+{{ JSGlue.include() }}
+<script src="{{ url_for('static', filename='js/wl.js') }}"></script>
+<script src="{{ url_for('static', filename='js/constants.js') }}"></script>
+<script>
+	(function(){
+		WL.init({
+	                client_id: APP_CLIENT_ID,
+	                redirect_uri: REDIRECT_URL,
+	                scope: ["wl.signin", "wl.basic", "wl.emails", ],
+	                response_type: "token",
+	                state: "{{STATE}}"
+	     });
+		WL.logout();
+		WL.Event.unsubscribe("auth.logout");
+		setTimeout(function() {
+			window.location.href = Flask.url_for('main_page');
+		}, 500);
+	})();
+</script>

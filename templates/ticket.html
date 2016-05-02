@@ -1,0 +1,17 @@
+<p>Dear {{session.username}},</p>
+<p>This is your ticket you need to use to gain access to the event</p>
+<table>
+    <tr valign="top">
+        <td>This is your ticket you need to use to gain access to the event</td>
+		<td>Topic: {{event.topic}}</td>
+		<td>Date: {{event.date}}</td>
+		<td>Address: {{event.address}} {{event.city}} {{event.state}} {{event.zipcode}}</td>
+		<td>Details: {{event.address}}</td>
+		<td>Quantity: {{newTicket.quantity}}</td>
+    </tr>
+    <tr>
+    	<td><img src="cid:ticket_secret"></td>
+    </tr>
+</table>
+<p>Regards,</p>
+<p><code>TIE</code> Training</p>

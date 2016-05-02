@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified Jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!--Knockout.js-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/knockout-3.4.0.js') }}'></script>
+
+	<!--Front-end View Controller-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/header.js') }}' defer="defer"></script>
+
+	<!--header stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/header.css') }}">
+	<!--footer stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/footer.css') }}">
+
+	<title>TIE Training | About Us</title>
+</head>
+
+<body>
+	<div class="container">
+		{% include "header.html" ignore missing %}
+		<div class="row primary-bg">
+				<h1 class="" style="margin:16px; color:#ffffff;">New Testimonials</h1>
+		</div>
+		{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+		    <ul class=flashes>
+		    {% for message in messages %}
+		      <li>{{ message }}</li>
+		    {% endfor %}
+		    </ul>
+		  {% endif %}
+		{% endwith %}
+		<div class="col-md-12">
+				<form  action="#" method = 'post' style="margin-top:20px;">
+					<div class="event col-md-12">
+						<fieldset>
+							<label for="topic">Topic*</label>
+							<input id="topic" type="text" maxlength="150" name="topic" class="testimonial form-control" placeholder="Best Kept Secret" required="required">	
+						</fieldset>
+					</div>
+					<div class="event col-md-12">
+						<fieldset>
+							<label for="detail">Details*</label>
+							<textarea id="detail" name="details" class="testimonial form-control" placeholder="Details of Testimonial" required="required"></textarea>	
+						</fieldset>
+					</div>
+					<p class="text-muted"><strong>*</strong> These fields are required.</p>
+					<input type="submit" class="center-block btn btn-success btn-send" value="Send message">
+				</form>
+			</div>
+
+		
+		{% include "footer.html" ignore missing %}
+	</div>
+</body>
+
+</html>
+
+

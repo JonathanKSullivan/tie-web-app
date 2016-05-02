@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified Jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!--Knockout.js-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/knockout-3.4.0.js') }}'></script>
+
+	<!--Front-end View Controller-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/header.js') }}' defer="defer"></script>
+
+	<!--header stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/header.css') }}">
+	<!--footer stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/footer.css') }}">
+
+	{{ JSGlue.include() }}
+	<script type="text/javascript">
+		function forwardCorrespondence(message_id) {
+			var isSure = prompt("Forward message to:");
+			if (isSure!= null){
+				window.open (Flask.url_for("forward_email", correspondence_id=message_id, isSure=isSure),'_self',false)
+			}
+		}
+		function respondCorrespondence(message_id) {
+			var isSure = prompt("Add your message here:");
+			if (isSure!= null){
+				window.open (Flask.url_for("respond_to_email", correspondence_id=message_id, isSure=isSure),'_self',false)
+			}
+		}
+		function deleteCorrespondence(id, email) {
+			var isSure = confirm("Are you sure you want to delete " + email + "\'s message");
+			if (isSure==true){
+				window.open (Flask.url_for("detete_correspondence", correspondence_id=id),'_self',false)
+			}
+		}
+	</script>
+
+	<title>TIE Training | About Us</title>
+</head>
+
+<body>
+	<body>
+	<div class="container light-primary-bg">
+		{% include "header.html" ignore missing %}
+		<div class="row primary-bg">
+				<h1 class="" style="margin:16px; color:#ffffff;">Manage Correspondence</h1>
+		</div>		
+		{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+		    <ul class=flashes>
+		    {% for message in messages %}
+		      <li>{{ message }}</li>
+		    {% endfor %}
+		    </ul>
+		  {% endif %}
+		{% endwith %}
+		<div class="row" style="margin-top:16px; border-bottom:solid 1px;">
+			<div class="col-md-12">
+				<table class="table">
+				  <thead>
+				    <tr>
+				      <th>#id</th>
+				      <th>Name</th>
+				      <th>Email</th>
+				      <th>Phone</th>
+				      <th>Message</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% for message in correspondence %}
+				    <tr>
+				      <th scope="row">{{message.id}}</th>
+				      <td>{{message.first_name}} {{message.last_name}}</td>
+				      <td>{{message.email}}</td>
+				      <td>{{message.phone}}</td>
+				      <td>{{message.message}}</td>
+				      <td>
+					      <button onclick="forwardCorrespondence({{message.id}})">Forward</button>
+					      <button onclick="respondCorrespondence({{message.id}})">Respond</button> 
+					      <button onclick="deleteCorrespondence({{message.id}}, '{{message.email}}')">Delete</button>
+				      </td>
+				    </tr>
+				    {% endfor %}
+				  </tbody>
+				</table>
+			</div>
+		
+		</div>
+		{% include "footer.html" ignore missing %}
+	</div>
+</body>
+</body>
+
+</html>

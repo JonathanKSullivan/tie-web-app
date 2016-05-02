@@ -1,0 +1,10 @@
+This is your ticket you need to use to gain access to the event 
+
+Topic: {{event.topic}}
+Date: {{event.date}}
+Address: {{event.address}} {{event.city}} {{event.state}} {{event.zipcode}}
+Details: {{event.address}}
+Quantity: {{newTicket.quantity}}
+
+Regards,
+TIE Training

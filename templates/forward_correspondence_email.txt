@@ -1,0 +1,8 @@
+
+
+Forwarded by: {{session.username}}
+First Name: {{correspondence.first_name}} 
+Last Name: {{correspondence.last_name}}
+Email: {{correspondence.email}} 
+Phone: {{correspondence.country_code}} {{correspondence.phone}}
+message: {{correspondence.message}

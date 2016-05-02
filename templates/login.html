@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified Jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!--Knockout.js-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/knockout-3.4.0.js') }}'></script>
+
+	<!--Front-end View Controller-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/header.js') }}' defer="defer"></script>
+
+	<!--header stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/header.css') }}">
+	<!--footer stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/footer.css') }}">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src="//apis.google.com/js/platform.js?onload=start"> </script>
+	<!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
+
+	<!--LOAD PRE-REQUISITES FOR LINKEDIN SIGN IN -->
+	<script type="text/javascript" src="//platform.linkedin.com/in.js">
+	    api_key:   78cqxw06026ji9
+	    onLoad:    onLinkedInLoad
+	    authorize: false
+	    lang:      en_US
+	    scope: r_basicprofile r_emailaddress
+	</script>
+	<script type="text/javascript">
+	    
+	    // Setup an event listener to make an API call once auth is complete
+	    function onLinkedInLoad() {
+	        IN.Event.on(IN, "auth", getProfileData);
+	    }
+
+	    // Handle the successful return from the API call
+	    function onSuccess(data) {
+	        console.log(data['values'][0]);
+
+	        $.ajax({
+			    type: 'POST',
+			    // Provide correct Content-Type, so that Flask will know how to process it.
+			    contentType: 'application/json',
+			    // Encode your data as JSON.
+			    data: JSON.stringify(data['values'][0]),
+			    // This is the type of data you're expecting back from the server.
+			    processData: false,
+			    url: '/lconnect/?state={{STATE}}',
+			    success: function(result) {
+			        // Handle or verify the server response if necessary.
+			      if (result) {
+			        $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...');
+			          setTimeout(function() {
+			          window.location.href = "/";
+			        }, 500);
+			      }else {
+			        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+			      }
+			 	}
+			});
+	    }
+
+	    // Handle an error response from the API call
+	    function onError(error) {
+	        console.log(error);
+	    }
+
+	    // Use the API call wrapper to request the member's basic profile data
+	    function getProfileData() {
+	        IN.API.Profile("me").fields("first-name", "last-name", "email-address", "picture-url").result(onSuccess).error(onError);
+	    }
+
+	</script>
+	<!-- END PRE-REQUISITES FOR LINKEDIN SIGN IN -->
+
+	<!--LOAD PRE-REQUISITES FOR LIVE SIGN IN -->
+	<script src="{{ url_for('static', filename='js/constants.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/wl.js') }}"></script>
+    <!-- END PRE-REQUISITES FOR LIVE SIGN IN -->
+
+	<title>TIE Training | About Us</title>
+</head>
+
+<body>
+	<body>
+	<div class="container light-primary-bg">
+		{% include "header.html" ignore missing %}
+		<div class="row primary-bg">
+				<h1 class="" style="margin:16px; color:#ffffff;">Login</h1>
+		</div>
+		{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+		    <ul class=flashes>
+		    {% for message in messages %}
+		      <li>{{ message }}</li>
+		    {% endfor %}
+		    </ul>
+		  {% endif %}
+		{% endwith %}
+		<p id="result"></p>
+		<div class="col-md-5" style="text-align:center; margin:15px;">
+			<form action="#" method = 'post'>
+				<fieldset>
+					<label for="form_name">Email: </label>
+					<input type="text" name="email" placeholder="Email" style="margin:15px;" class="login form-control">
+					<br/>
+					<label for="form_name">Password:</label>
+					<input type="password" name="password" placeholder="Password" style="margin:15px;" class="login form-control">
+					<br/>
+					<input type="submit" value="Login" style="margin:15px;">	
+				</fieldset>
+			</form>
+			<a href="/login/new">Create a new Account</a>
+			<br/>
+			<a href="/forgotten/password">Forgot Password?</a>
+		</div>
+		<div class="col-md-6" style="text-align:center;">
+			
+			<h3>or login with</h3>
+		
+			<!-- GOOGLE PLUS SIGN IN BUTTON-->
+			<div  style="text-align:center; margin:30px;">
+				<div id="signInButton" style="">
+			        <span class="g-signin"
+			            data-scope="openid email"
+			            data-clientid="301973621622-ad2c03bpdqe07uci07gn6rbb4bltt1ev.apps.googleusercontent.com"
+			            data-redirecturi="postmessage"
+			            data-accesstype="offline"
+			            data-cookiepolicy="single_host_origin"
+			            data-callback="signInCallback"
+			            data-approvalprompt="force">
+			        </span>
+		        </div>
+			</div>
+	        
+
+	        <script>
+	        function makeBaseAuth(user, pswd){ 
+		    	var token = user + ':' + pswd;
+		    	var hash = "";
+		    	if (btoa) {
+		    		hash = btoa(token);
+		    	}
+		    	return "Basic " + hash;
+		   		}
+			function signInCallback(authResult) {
+			  if (authResult['code']) {
+			    // Hide the sign-in button now that the user is authorized
+			    $('#signinButton').attr('style', 'display: none');
+			    // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+			    $.ajax({
+			      type: 'POST',
+			      url: '/gconnect/?state={{STATE}}',
+			      processData: false,
+			      data: authResult['code'],
+			      contentType: 'application/octet-stream; charset=utf-8',
+			      beforeSend: function (xhr) {
+				    xhr.setRequestHeader('Authorization', makeBaseAuth('user', 'pswd'));
+				  },
+			      success: function(result) {
+			        // Handle or verify the server response if necessary.
+			        if (result) {
+			          $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+			         setTimeout(function() {
+			          window.location.href = "/";
+			         }, 500);
+			          
+			      } else if (authResult['error']) {
+			    console.log('There was an error: ' + authResult['error']);
+			  } else {
+			        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+			         }
+			      }
+			      
+			  }); } }
+			</script>
+		<!--END GOOGLE PLUS SIGN IN BUTTON -->
+		<!---FACEBOOK SIGN IN -->
+			<script>
+					  window.fbAsyncInit = function() {
+					  FB.init({
+					    appId      : '1694373770841643',
+					    cookie     : true,  // enable cookies to allow the server to access 
+					                        // the session
+					    xfbml      : true,  // parse social plugins on this page
+					    version    : 'v2.2' // use version 2.2
+					  });
+					  };
+					  // Load the SDK asynchronously
+					  (function(d, s, id) {
+					    var js, fjs = d.getElementsByTagName(s)[0];
+					    if (d.getElementById(id)) return;
+					    js = d.createElement(s); js.id = id;
+					    js.src = "//connect.facebook.net/en_US/sdk.js";
+					    fjs.parentNode.insertBefore(js, fjs);
+					  }(document, 'script', 'facebook-jssdk'));
+					  // Here we run a very simple test of the Graph API after login is
+					  // successful.  See statusChangeCallback() for when this call is made.
+					  function sendTokenToServer() {
+					    var access_token = FB.getAuthResponse()['accessToken'];
+					    console.log(access_token)
+					    console.log('Welcome!  Fetching your information.... ');
+					    FB.api('/me', function(response) {
+					      console.log('Successful login for: ' + response.name);
+					     $.ajax({
+					      type: 'POST',
+					      url: '/fbconnect/?state={{STATE}}',
+					      processData: false,
+					      data: access_token,
+					      contentType: 'application/octet-stream; charset=utf-8',
+					      success: function(result) {
+					        // Handle or verify the server response if necessary.
+					        if (result) {
+					          $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+					         setTimeout(function() {
+					          window.location.href = "/";
+					         }, 500);
+					          
+					      } else {
+					        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+					         }
+					      }
+					      
+					  });
+					    });
+					  }
+					</script>
+					<div style="text-align:center; margin:30px;">
+					    <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
+							<a href='javascript:sendTokenToServer()'>Login with Facebook</a>
+						</fb:login-button>
+					</div>
+			<!--END FACEBOOK SIGN IN -->
+
+			<!---LINKEDIN SIGN IN -->
+			<script type="in/Login"></script>
+			<!--END LINKEDIN SIGN IN -->
+
+			<!---LIVE SIGN IN -->
+			<div id="signin" style="text-align:center; margin:30px;"></div>
+	    
+	        <script>
+
+	            WL.Event.subscribe("auth.login", onLogin);
+	            WL.init({
+	                client_id: APP_CLIENT_ID,
+	                redirect_uri: REDIRECT_URL,
+	                scope: ["wl.basic", "wl.emails", ],
+	                response_type: "token",
+	                state: "{{STATE}}",
+	                status: false,
+	                secure_cookie: true
+	            });
+	            WL.ui({
+	                name: "signin",
+	                element: "signin",
+	                state: "{{STATE}}",
+	                type: "custom",
+	                sign_in_text: "Connect",
+	                sign_out_text: "Enable Microsoft"
+	            });
+	            function onLogin (session) {
+	                if (!session.error) {
+	                    WL.api({
+	                        path: "me",
+	                        method: "GET"
+	                    }).then(
+	                        function (response) {
+	                        	console.log(response);
+	                            $.ajax({
+								    type: 'POST',
+								    // Provide correct Content-Type, so that Flask will know how to process it.
+								    contentType: 'application/json',
+								    // Encode your data as JSON.
+								    data: JSON.stringify(response),
+								    // This is the type of data you're expecting back from the server.
+								    processData: false,
+								    url: '/mconnect/?state={{STATE}}',
+								    beforeSend: function (xhr) {
+									  xhr.setRequestHeader('Authorization', makeBaseAuth('user', 'pswd'));
+									},
+								    success: function(result) {
+								        // Handle or verify the server response if necessary.
+								      if (result) {
+								        $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...');
+								          setTimeout(function() {
+								          window.location.href = "/";
+								        }, 500);
+								      }else {
+								        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+								      }
+								 	}
+								});
+	                        },
+	                        function (responseFailed) {
+	                            $("#result").innerText = "Error calling API: " + responseFailed.error.message;
+	                        }
+	                    );
+	                }
+	                else {
+	                    $("#result").innerText = "Error signing in: " + session.error_description;
+	                }
+	            }
+	        </script> 
+			<!--END LIVE SIGN IN -->
+		</div>
+		
+
+
+		{% include "footer.html" ignore missing %}
+	</div>
+</body>
+</body>
+
+</html>

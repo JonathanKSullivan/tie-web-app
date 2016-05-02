@@ -1,0 +1,166 @@
+* {
+	font-family: "Helvetica Neue Bold", Roboto, Helvetica, Arial, sans-serif;
+	font-weight: 700;
+}
+
+h1 {
+	font-family: "Helvetica Neue Light", Roboto, Helvetica, Arial, sans-serif;
+	font-size: 50px;
+	color: #51453B;
+	line-height: 60px;
+	font-weight: 300;
+}
+
+h2 {
+	font-size: 24px;
+	color: #42C3C9;
+	line-height: 29px;
+}
+
+h3 {
+	font-size: 18px;
+	color: #4A4A4A;
+	line-height: 23px;
+}
+ p {
+ 	font-family: "Helvetica Neue", Roboto, Helvetica, Arial, sans-serif;
+ 	font-size: 16px;
+ 	line-height: 24px;
+ 	font-weight: 400;
+ }
+
+ strong {
+ 	font-size: 16px;
+ 	line-height: 24px;
+ }
+
+ a {
+ 	font-size: 14px;
+ 	line-height: 17px;
+ }
+
+.flashes {
+	background-color: #4CAF50;
+	width:100%;
+	margin:0px;
+	padding:0px;
+	text-decoration: none;
+
+}
+
+.flashes li {
+	list-style-type: none;
+	text-align: center;
+
+}
+
+.right{
+	float:right;
+}
+
+.dark-primary-bg{
+	background-color: #F57C00;
+}
+
+.primary-bg{
+	background-color: #FF9800;
+}
+
+.light-primary-bg{
+	background-color: #FFE0B2;
+}
+
+
+.divider{
+	color: #B6B6B6;
+}
+
+.primary-text{
+	color: #212121;
+}
+
+.nav-tabs>li>a:hover, .nav>li>a:focus, .nav>li>a:hover {
+    border-color: #FF9800 !important;
+    background-color: #FF9800 !important;
+}
+
+.menu{
+	border-color: #FF9800 !important;
+}
+
+.green-text{
+	color: #4CAF50;
+}
+
+.orange-text{
+	color: #F57C00;
+}
+
+.primary-text{
+	color: #212121;
+}
+
+.secondary-text{
+	color: #727272;
+}
+
+.large {
+	font-size: 30px;
+}
+
+.medium {
+	font-size: 20px;
+}
+
+.normal {
+	font-size: 15px;
+}
+
+.center{
+	margin: 3px auto;
+}
+
+.honor-cert{
+	margin: 12px 0px;
+}
+
+.footer-text{
+	margin: 5px;
+	font-size: 15px;
+}
+
+.navbar, .navbar-inverse {
+	border-radius: 0;
+	border: none;
+	margin-bottom: 0;
+	min-height: 80px;
+}
+
+.nav li {
+	display: inline;
+	color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	color: #ffffff;
+	font-family: Lato;
+	font-size: 16px;
+	font-weight: 300;
+	padding: 30px 20px 33px 20px;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+	color: #ffffff;
+	font-family: Lato;
+	font-size: 20px;
+	font-weight: 300;
+	padding: 30px 17px 33px 17px;
+}
+
+.navbar-inverse .navbar-nav li a:hover {
+	background-color: #444444;
+	transition: 0.7s all linear;
+	height: 100%;
+}
+nav:after{
+	background-color: #ffffff;
+}

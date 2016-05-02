@@ -1,0 +1,13 @@
+<p>Dear, {{correspondence.first_name}} {{correspondence.last_name}}</p>
+<p><a href="{{ url_for('main_page', _external=True) }}"></a> is now a follower.</p>
+<table>
+    <tr valign="top">
+        <td>
+            <p>{{msg_response}}</p><br/>
+            
+        </td>
+    </tr>
+</table>
+<p>Regards,</p>
+<p>{{session.username}}</p>
+<p>The <code>TIE</code> admin</p>

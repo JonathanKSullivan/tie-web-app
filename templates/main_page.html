@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified Jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!--Knockout.js-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/knockout-3.4.0.js') }}'></script>
+
+	<!--Front-end View Controller-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/header.js') }}' defer="defer"></script>
+
+	<!--Register service worker-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/loader.js') }}' defer="defer"></script>
+
+	<!--header stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/header.css') }}">
+	<!--footer stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/footer.css') }}">
+
+	{{ JSGlue.include() }}
+	
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>TIE Training | Home</title>
+</head>
+
+<body onload="registerServiceWorker()">
+
+	<div class="container light-primary-bg">
+		{% include "header.html" ignore missing %}
+			<div class="row primary-bg">
+				<h1 class="" style="margin:16px; color:#ffffff;">Home</h1>
+			</div>
+			{% with messages = get_flashed_messages() %}
+			  {% if messages %}
+			    <ul class=flashes>
+			    {% for message in messages %}
+			      <li>{{ message }}</li>
+			    {% endfor %}
+			    </ul>
+			  {% endif %}
+			{% endwith %}
+			
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="green-text large">Darilyn W. Peterson<span class="medium">, BA, PMP, ITIL</span></h3>
+						<h4 class="primary-text">Corporate Trainer & Project Management Consultant</h4>
+					</div>
+					<div class="col-md-12">
+						<img src="http://www.fashionfist.com/wp-content/uploads/2014/10/Anarkali-Dress-Online-2015-Collection-for-Girls-Fashion-Fist-1.jpg" class="img-responsive center">
+					</div>
+				</div>
+				
+			</div>
+			<div class="col-md-6">
+				<div class="col-md-12">
+					<img src="{{ url_for('static', filename='images/logo-03.png') }}" class="img-responsive center" style="margin-top:96px;">
+				</div>
+				<div class="col-md-12">
+					<h5 class="primary-text large">Welcome to a learning experience of a life time!</h5>
+					<ul>
+						<li class="secondary-text medium"><span class="orange-text">Tactical</span> training aligned with your corporate goals</li>
+						<li class="secondary-text medium"><span class="green-text">Interactive</span> scenario based learning and consulting activities</li>
+						<li class="secondary-text medium"><span class="orange-text">Engaging</span> case studies focused on current trends</li>
+					</ul>
+				</div>
+			</div>
+			
+		{% include "footer.html" ignore missing %}
+	</div>
+</body>
+
+</html>

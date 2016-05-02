@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified Jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!--Knockout.js-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/knockout-3.4.0.js') }}'></script>
+
+	<!--Front-end View Controller-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/header.js') }}' defer="defer"></script>
+
+	<!--header stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/header.css') }}">
+	<!--footer stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/footer.css') }}">
+
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	 
+	<title>TIE Training | Meet Darylin</title>
+</head>
+
+<body>
+	<div class="container light-primary-bg">
+		{% include "header.html" ignore missing %}
+			<div class="row primary-bg">
+				<h1 class="" style="margin:16px; color:#ffffff;">Meet Darilyn</h1>
+			</div>
+			{% with messages = get_flashed_messages() %}
+			  {% if messages %}
+			    <ul class=flashes>
+			    {% for message in messages %}
+			      <li>{{ message }}</li>
+			    {% endfor %}
+			    </ul>
+			  {% endif %}
+			{% endwith %}
+			<div class="col-md-8">
+				<div class="row" style="margin-top:16px;">
+					<div class="col-md-6">
+						<img src="data:image/jpeg;base64,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" class="img-responsive center">
+					</div>
+					<div class="col-md-6">
+						<img src="http://www.trigger-proof.com/wp-content/uploads/2013/04/high-school-students.jpg" class="img-responsive center" style="max-width:350px;">
+					</div>
+					<div class="col-md-12">
+						<h1 class="medium">Why Corporate training and consulting and why now?</h1>
+						<p class="normal secondary-text">I am so fortunate to have had a  35 year career with IBM.  I have learned so many valuable skills that account for my longevity. My style is very Tactical, Interactive, and Engaging.</p>
+						<p class="normal secondary-text">I have managed many multicultural  teams during strategic outsourcing projects.  Too many times I have witnessed the struggles of both client and vendor regarding: </p>
+						<ol class="normal secondary-text">
+							<li >Scheduling and hosting productive meetings</li>
+							<li>Working with Remote teams</li>
+							<li>Building trust</li>
+							<li>Managing vendors, milestones, deliverables, risk, finances, etc.</li>
+							<li>I have a proven track record for mentoring, coaching and training Technical teams from inception to project close out</li>
+							<li>I am very skilled at gathering requirements and managing technical teams to produce the desired outcome</li>
+						</ol>
+						{% if 'username' not in session %}
+						<p class="normal secondary-text">Why don’t you join me for an experience of a life time? <a href="/signup">Sign up</a> to find out why you don’t want to miss this unique interaction with other highly.</p>
+						{% endif %}
+					</div>
+				</div>
+				
+			</div>
+			<div class="col-md-4">
+				<div class="col-md-12">
+					<h1 class="medium">Honors and Awards</h1>
+					<ul class="secondary-text">
+						<li class="honor-cert">IBM Service Excellence Award 2015</li>
+						<li class="honor-cert">IBM Technical Leadership Award 2008</li>
+						<li class="honor-cert">IBM 100% Club 2002</li>
+						<li class="honor-cert">IBM Mean Service Award Winner 1990, 2001</li>
+						<li class="honor-cert">IBM Service Employee of the Year 1992</li>
+					</ul>
+				</div>
+				<div class="col-md-12">
+					<h1 class="medium">Certifications and Organizations</h1>
+					<ul class="cert normal secondary-text">
+						<li class="honor-cert">PMP Certified</li>
+						<li class="honor-cert">IBM Certified Project Manager</li>
+						<li class="honor-cert">ITIL Certified</li>
+						<li class="honor-cert">Master Certificate in Project Manager, George Washington University</li>
+						<li class="honor-cert">1st Vice President Dillard University Alumni Association D/FW Chapter</li>
+						<li class="honor-cert">Master Fund Raiser and Recruiter, Dillard University Alumni Association</li>
+						<li class="honor-cert">Volunteer Mock Interviewer, Federal Bureau of Prisons</li>
+					</ul>
+				</div>
+				<div class="col-md-12">
+				{% if 'username' not in session %}
+					<h1 class="large  text-center"><u><a class="green-text" style="margin:12px; padding:20px;" href="url_for('login')">Sign up</a></u></h1>
+				{% endif %}
+				</div>
+			</div>
+	
+		{% include "footer.html" ignore missing %}
+	</div>
+
+</body>
+
+</html>

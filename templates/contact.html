@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified Jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!--Knockout.js-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/knockout-3.4.0.js') }}'></script>
+
+	<!--Front-end View Controller-->
+	<script type='text/javascript' src='{{ url_for('static', filename='js/header.js') }}' defer="defer"></script>
+
+	<!--header stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/header.css') }}">
+	
+	<!--footer stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/footer.css') }}">
+
+	<!--contact form stylesheet-->
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/contact.css') }}">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>TIE Training | Contact Me</title>
+</head>
+
+<body>
+
+
+	<div class="container light-primary-bg">
+		{% include "header.html" ignore missing %}
+			<div class="row primary-bg">
+				<h1 class="" style="margin:16px; color:#ffffff;">Contact</h1>
+			</div>
+			{% with messages = get_flashed_messages() %}
+			  {% if messages %}
+			    <ul class=flashes>
+			    {% for message in messages %}
+			      <li>{{ message }}</li>
+			    {% endfor %}
+			    </ul>
+			  {% endif %}
+			{% endwith %}
+			<div class="col-md-6">
+				<h1>Contact Info</h1>
+				<div class="row" style="margin-top:20px;">
+					<div class="col-xs-4 medium">
+					Office number:
+					</div>
+					<div class="col-xs-6 medium">
+					972.285.8100
+					</div>
+				</div>
+				<div class="row" style="margin-top:20px;">
+					<div class="col-xs-4 medium">
+					Email address:
+					</div>
+					<div class="col-xs-6 medium">
+					darilyn503@gmail.com
+					</div>
+				</div>
+				<div class="row" style="margin-top:40px;">
+					<div class="col-xs-4">
+						<img src="http://www.game-point.net/misc/pp/icon-facebook-50x50.png" class="img-responsive center">
+					</div>
+					<div class="col-xs-4">
+						<img src="http://www.game-point.net/misc/pp/icon-twitter-50x50.png" class="img-responsive center">
+					</div>
+					<div class="col-xs-4">
+						<img src="http://www.kerrydean.com/pictures/icons-social/linkedin-50x50.png" class="img-responsive center">
+					</div>
+				</div>
+				
+			</div>
+			<div class="col-md-6">
+				<form action="#" method = 'post' style="margin-top:20px;">
+				<h1>Leave a Message</h1>
+					<div class="contact col-md-6">
+						<fieldset>
+						<label for="form_name">First Name *</label>
+						<input id="form_name" type="text" name="name" class="contact form-control" placeholder="Please enter your first name" required="required">
+						<label for="form_lastname">Last Name *</label>
+						<input id="form_lastname" type="text" name="surname" class="contact form-control" placeholder="Please enter your last name" required="required">
+					</fieldset>
+					</div>
+					<div class="col-md-6">
+						<fieldset>
+							<label for="form_email">Email *</label>
+							<input id="form_email" type="email" name="email" class="contact form-control" placeholder="Please enter your email" required="required">
+							<label for="form_phone">Phone</label>
+			                <input id="form_phone" type="tel" name="phone" class="contact form-control" placeholder="Please enter your phone">
+						</fieldset>
+					</div>
+					<div class="col-md-12">
+						<fieldset>
+							<label for="form_message">Message *</label>
+			                <textarea id="form_message" name="message" class="contact form-control" placeholder="Message for me" rows="4" required="required"  style="margin-bottom: 12px"></textarea>
+						</fieldset>	
+					</div>
+					<div>
+						<input type="submit" id="form_submit" class="center-block btn btn-success btn-send" value="Send message">
+					</div>
+					<p class="text-muted"><strong>*</strong> These fields are required.</p>
+				</form>
+				<script src="{{ url_for('static', filename='js/contact.js') }}"></script>
+			</div>
+	
+		{% include "footer.html" ignore missing %}
+	</div>
+
+
+</body>
+
+</html>
